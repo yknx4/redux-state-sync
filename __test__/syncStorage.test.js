@@ -63,6 +63,6 @@ describe('state should be mapped', () => {
 
         const next = action => expect(action.payload).toEqual(JSON.stringify(mockState));
 
-        createStateSyncMiddleware({ prepareState: JSON.stringify, channel: 'test', broadcastChannelOption: {adapter: 'memory'} })(mockStore)(next)({ type: '&_SEND_INIT_STATE' });
+        createStateSyncMiddleware({ prepareState: JSON.stringify, channel: new PouchDB('test', {adapter: 'memory'}) })(mockStore)(next)({ type: '&_SEND_INIT_STATE' });
     });
 });

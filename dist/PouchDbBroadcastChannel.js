@@ -4,21 +4,18 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var PouchDB = require('pouchdb');
-
 var PouchDbBroadcastChannel = function () {
   /**
    * Creates an instance of PouchDbBroadcastChannel.
-   * @param {string} db
-   * @param {PouchDB.Configuration.DatabaseConfiguration} options
+   * @param {PouchDB.Database} db
    * @memberof PouchDbBroadcastChannel
    */
-  function PouchDbBroadcastChannel(db, options) {
+  function PouchDbBroadcastChannel(db) {
     var _this = this;
 
     _classCallCheck(this, PouchDbBroadcastChannel);
 
-    this.$db = new PouchDB(db, options);
+    this.$db = db;
     this.$onChange = this.$db.changes({ live: true, include_docs: true }).then(function (changes) {
       changes.results.forEach(function (r) {
         return _this.onMessage(r.doc);

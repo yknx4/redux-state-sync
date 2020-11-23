@@ -95,7 +95,7 @@ export function MessageListener({ channel, dispatch, allowed }) {
 
 export const createStateSyncMiddleware = (config = defaultConfig) => {
     const allowed = isActionAllowed(config);
-    const channel = new PouchDbBroadcastChannel(config.channel, config.broadcastChannelOption);
+    const channel = new PouchDbBroadcastChannel(config.channel);
     const prepareState = config.prepareState || defaultConfig.prepareState;
     let messageListener = null;
 

@@ -1,14 +1,11 @@
-import PouchDB from 'pouchdb'
-
 class PouchDbBroadcastChannel {
   /**
    * Creates an instance of PouchDbBroadcastChannel.
-   * @param {string} db
-   * @param {PouchDB.Configuration.DatabaseConfiguration} options
+   * @param {PouchDB.Database} db
    * @memberof PouchDbBroadcastChannel
    */
-  constructor(db, options) {
-    this.$db = new PouchDB(db, options)
+  constructor(db) {
+    this.$db = db
     this.$onChange = this.$db.changes({live: true, include_docs: true}).then(changes => {
       changes.results.forEach(r => this.onMessage(r.doc))
     }).catch(console.error)

@@ -128,7 +128,7 @@ var createStateSyncMiddleware = exports.createStateSyncMiddleware = function cre
     var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultConfig;
 
     var allowed = isActionAllowed(config);
-    var channel = new _PouchDbBroadcastChannel.PouchDbBroadcastChannel(config.channel, config.broadcastChannelOption);
+    var channel = new _PouchDbBroadcastChannel.PouchDbBroadcastChannel(config.channel);
     var prepareState = config.prepareState || defaultConfig.prepareState;
     var messageListener = null;
 
