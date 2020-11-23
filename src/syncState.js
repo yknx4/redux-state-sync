@@ -37,6 +37,7 @@ export function generateUuidForAction(action) {
     const stampedAction = action;
     stampedAction.$uuid = guid();
     stampedAction.$wuid = WINDOW_STATE_SYNC_ID;
+    stampedAction._id = stampedAction.$uuid
     return stampedAction;
 }
 // export for test
