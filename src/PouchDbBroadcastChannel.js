@@ -1,4 +1,4 @@
-const PouchDB = require('pouchdb')
+import PouchDB from 'pouchdb'
 
 class PouchDbBroadcastChannel {
   /**
