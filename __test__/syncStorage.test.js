@@ -1,6 +1,10 @@
 /* eslint-disable no-undef */
 import { generateUuidForAction, isActionAllowed, createStateSyncMiddleware } from '../dist/syncState';
 
+const PouchDB = require('pouchdb')
+PouchDB.plugin(require('pouchdb-adapter-memory'));
+
+
 describe('action should have uuid', () => {
     it('action should have both $uuid and $wuid', () => {
         const action = { type: 'Test', payload: 'Test' };
@@ -59,6 +63,6 @@ describe('state should be mapped', () => {
 
         const next = action => expect(action.payload).toEqual(JSON.stringify(mockState));
 
-        createStateSyncMiddleware({ prepareState: JSON.stringify })(mockStore)(next)({ type: '&_SEND_INIT_STATE' });
+        createStateSyncMiddleware({ prepareState: JSON.stringify, channel: 'test', broadcastChannelOption: {adapter: 'memory'} })(mockStore)(next)({ type: '&_SEND_INIT_STATE' });
     });
 });
